@@ -1,1 +1,149 @@
-<p>inscripciones works!</p>
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card shadow-sm mb-4">
+      <div class="card-header bg-warning">
+        <h5 class="mb-0">Nueva inscripción</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="createForm" (ngSubmit)="submit()" novalidate>
+          <div class="mb-3">
+            <label class="form-label" for="evento">Evento</label>
+            <select id="evento" class="form-select" formControlName="evento_id">
+              <option value="" disabled>Seleccione un evento</option>
+              <option *ngFor="let evento of eventos" [value]="evento.evento_id">
+                {{ evento.nombre }} ({{ evento.fecha | date:'mediumDate' }})
+              </option>
+            </select>
+            <div class="form-text text-danger" *ngIf="eventoId?.invalid && (eventoId?.dirty || eventoId?.touched)">
+              Debe seleccionar un evento.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="participante">Participante</label>
+            <select id="participante" class="form-select" formControlName="participante_id">
+              <option value="" disabled>Seleccione un participante</option>
+              <option *ngFor="let participante of participantes" [value]="participante.participante_id">
+                {{ participante.nombre }} {{ participante.apellido }}
+              </option>
+            </select>
+            <div class="form-text text-danger" *ngIf="participanteId?.invalid && (participanteId?.dirty || participanteId?.touched)">
+              Debe seleccionar un participante.
+            </div>
+          </div>
+
+          <button class="btn btn-warning w-100" type="submit" [disabled]="createForm.invalid">
+            Registrar inscripción
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-header">
+        <h5 class="mb-0">Filtros</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="filterForm" novalidate>
+          <div class="mb-3">
+            <label class="form-label" for="filter-evento">Evento</label>
+            <select id="filter-evento" class="form-select" formControlName="evento_id">
+              <option value="">Todos</option>
+              <option *ngFor="let evento of eventos" [value]="evento.evento_id">{{ evento.nombre }}</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="filter-participante">Participante</label>
+            <select id="filter-participante" class="form-select" formControlName="participante_id">
+              <option value="">Todos</option>
+              <option *ngFor="let participante of participantes" [value]="participante.participante_id">
+                {{ participante.nombre }} {{ participante.apellido }}
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="filter-estado">Estado</label>
+            <select id="filter-estado" class="form-select" formControlName="estado">
+              <option value="">Todos</option>
+              <option value="Activa">Activa</option>
+              <option value="Cancelada">Cancelada</option>
+            </select>
+          </div>
+
+          <button class="btn btn-outline-secondary w-100" type="button" (click)="limpiarFiltros()">
+            Limpiar filtros
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4 class="mb-0">Inscripciones</h4>
+      <button class="btn btn-link" type="button" (click)="cargarInscripciones()">
+        Actualizar
+      </button>
+    </div>
+
+    <div *ngIf="message" class="alert" [ngClass]="{'alert-success': message.type === 'success', 'alert-danger': message.type === 'danger'}">
+      {{ message.text }}
+    </div>
+
+    <div *ngIf="loading" class="text-center py-5 text-muted">
+      Cargando inscripciones...
+    </div>
+
+    <div *ngIf="!loading">
+      <div class="table-responsive" *ngIf="filteredInscripciones.length; else noInscripciones">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Evento</th>
+              <th>Participante</th>
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th class="text-end">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let inscripcion of filteredInscripciones">
+              <td>
+                <div class="fw-semibold">{{ inscripcion.evento_nombre }}</div>
+                <div class="small text-muted">ID evento: {{ inscripcion.evento_id }}</div>
+              </td>
+              <td>
+                <div class="fw-semibold">{{ inscripcion.participante_nombre_completo }}</div>
+                <div class="small text-muted">ID participante: {{ inscripcion.participante_id }}</div>
+              </td>
+              <td>{{ inscripcion.fecha_inscripcion | date:'short' }}</td>
+              <td>
+                <span class="badge" [ngClass]="{'text-bg-success': inscripcion.estado === 'Activa', 'text-bg-secondary': inscripcion.estado !== 'Activa'}">
+                  {{ inscripcion.estado }}
+                </span>
+              </td>
+              <td class="text-end">
+                <div class="btn-group btn-group-sm" role="group">
+                  <button type="button" class="btn btn-outline-success" (click)="actualizarEstado(inscripcion, 'Activa')">
+                    Activar
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary" (click)="actualizarEstado(inscripcion, 'Cancelada')">
+                    Cancelar
+                  </button>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-danger ms-2" (click)="eliminarInscripcion(inscripcion)">
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noInscripciones>
+        <div class="alert alert-info">No hay inscripciones registradas.</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

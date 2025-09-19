@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "e1xqSNz60e0=",
+  "dgSpecHash": "MC86pl+ePrU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\CMG\\Downloads\\Evaluacion 2\\GestionEventosDeportivos\\GestionEventosDeportivos\\GestionEventosDeportivos.csproj",
+  "projectFilePath": "C:\\Users\\CMG\\Downloads\\eva2-codex-design-sports-event-management-system (1)\\eva2-codex-design-sports-event-management-system\\GestionEventosDeportivosBackend\\GestionEventosDeportivos.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\CMG\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\CMG\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

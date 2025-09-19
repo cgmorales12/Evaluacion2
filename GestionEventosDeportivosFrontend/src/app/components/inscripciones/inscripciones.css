@@ -1,0 +1,24 @@
+.card {
+  border: none;
+}
+
+.card-header {
+  font-weight: 600;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.btn-link {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.alert {
+  margin-bottom: 1rem;
+}
+
+.badge {
+  font-size: 0.875rem;
+}

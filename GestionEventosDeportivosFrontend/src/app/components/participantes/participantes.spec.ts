@@ -1,18 +1,39 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { ParticipantesComponent } from './participantes';
+import { ParticipanteService } from '../../services/participante.service';
 
-import { Participantes } from './participantes';
-
-describe('Participantes', () => {
-  let component: Participantes;
-  let fixture: ComponentFixture<Participantes>;
+describe('ParticipantesComponent', () => {
+  let component: ParticipantesComponent;
+  let fixture: ComponentFixture<ParticipantesComponent>;
+  let participanteServiceSpy: jasmine.SpyObj<ParticipanteService>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [Participantes]
-    })
-    .compileComponents();
+    participanteServiceSpy = jasmine.createSpyObj('ParticipanteService', [
+      'getParticipantes',
+      'createParticipante',
+      'updateParticipante',
+      'deleteParticipante'
+    ]);
 
-    fixture = TestBed.createComponent(Participantes);
+    participanteServiceSpy.getParticipantes.and.returnValue(of([]));
+    participanteServiceSpy.createParticipante.and.returnValue(of({
+      participante_id: 1,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      email: 'correo@correo.com',
+      telefono: '123456789',
+      nombre_completo: 'Nombre Apellido'
+    }));
+    participanteServiceSpy.updateParticipante.and.returnValue(of(null));
+    participanteServiceSpy.deleteParticipante.and.returnValue(of(null));
+
+    await TestBed.configureTestingModule({
+      imports: [ParticipantesComponent],
+      providers: [{ provide: ParticipanteService, useValue: participanteServiceSpy }]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ParticipantesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
