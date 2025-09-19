@@ -1,42 +1,77 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <div class="jumbotron bg-primary text-white p-5 rounded mb-4">
-        <h1 class="display-4">Sistema de Gestión de Eventos Deportivos</h1>
-        <p class="lead">Administra eventos deportivos, participantes e inscripciones de manera eficiente.</p>
-      </div>
+<section class="home-hero glass-card hover-lift">
+  <div class="home-hero__text">
+    <span class="section-title">Centro de mando deportivo</span>
+    <h2 class="section-heading">Bienvenido a la nueva era de gestión</h2>
+    <p>
+      Visualiza y controla cada detalle de tus competencias desde un mismo lugar. Nuestro rediseño entrega claridad,
+      dinamismo y una estética inmersiva para impulsar tu operación.
+    </p>
+    <div class="hero-cta">
+      <a routerLink="/eventos" class="btn btn-primary">Planificar eventos</a>
+      <a routerLink="/inscripciones" class="btn btn-warning">Revisar inscripciones</a>
     </div>
   </div>
-  
-  <div class="row">
-    <div class="col-md-4 mb-4">
-      <div class="card h-100">
-        <div class="card-body text-center">
-          <h5 class="card-title">🏅 Eventos</h5>
-          <p class="card-text">Crea y gestiona eventos deportivos, define fechas, ubicaciones y descripciones.</p>
-          <a routerLink="/eventos" class="btn btn-primary">Gestionar Eventos</a>
-        </div>
-      </div>
+  <div class="home-hero__metrics">
+    <div class="metric-card">
+      <span>Eventos destacados</span>
+      <strong>+12</strong>
     </div>
-    
-    <div class="col-md-4 mb-4">
-      <div class="card h-100">
-        <div class="card-body text-center">
-          <h5 class="card-title">👥 Participantes</h5>
-          <p class="card-text">Registra participantes con su información de contacto y datos personales.</p>
-          <a routerLink="/participantes" class="btn btn-success">Gestionar Participantes</a>
-        </div>
-      </div>
+    <div class="metric-card">
+      <span>Participantes activos</span>
+      <strong>320</strong>
     </div>
-    
-    <div class="col-md-4 mb-4">
-      <div class="card h-100">
-        <div class="card-body text-center">
-          <h5 class="card-title">📝 Inscripciones</h5>
-          <p class="card-text">Administra las inscripciones de participantes en los diferentes eventos.</p>
-          <a routerLink="/inscripciones" class="btn btn-warning">Gestionar Inscripciones</a>
-        </div>
-      </div>
+    <div class="metric-card">
+      <span>Inscripciones en curso</span>
+      <strong>87</strong>
     </div>
   </div>
-</div>
+</section>
+
+<section class="features-grid">
+  <article class="feature-card glass-card hover-lift">
+    <div class="feature-icon">🎯</div>
+    <h3>Planificación intuitiva</h3>
+    <p>Configura fechas, ubicaciones y descripciones con formularios más claros y directos.</p>
+  </article>
+  <article class="feature-card glass-card hover-lift">
+    <div class="feature-icon">🤝</div>
+    <h3>Gestión humana</h3>
+    <p>Conecta con tus participantes y mantén la comunicación organizada en todo momento.</p>
+  </article>
+  <article class="feature-card glass-card hover-lift">
+    <div class="feature-icon">⚡</div>
+    <h3>Control instantáneo</h3>
+    <p>Filtra, actualiza y toma decisiones en segundos gracias al nuevo panel visual.</p>
+  </article>
+</section>
+
+<section class="home-roadmap glass-card">
+  <div class="roadmap-header">
+    <span class="section-title">Flujo recomendado</span>
+    <h3 class="section-heading">Optimiza tu operación en tres pasos</h3>
+    <p>Trabaja con un proceso claro para mantener tus eventos siempre a la altura.</p>
+  </div>
+  <ul class="timeline">
+    <li class="timeline-step">
+      <span class="step-number">1</span>
+      <div>
+        <h4>Diseña el evento perfecto</h4>
+        <p>Define objetivos, describe la experiencia y entrega contexto a tus asistentes.</p>
+      </div>
+    </li>
+    <li class="timeline-step">
+      <span class="step-number">2</span>
+      <div>
+        <h4>Potencia la participación</h4>
+        <p>Registra atletas, gestiona sus datos y comunícate con una base ordenada.</p>
+      </div>
+    </li>
+    <li class="timeline-step">
+      <span class="step-number">3</span>
+      <div>
+        <h4>Administra inscripciones en vivo</h4>
+        <p>Revisa estados, actualiza registros y mantén la coordinación sin fricciones.</p>
+      </div>
+    </li>
+  </ul>
+</section>

@@ -1,12 +1,18 @@
-<div class="row g-4">
-  <div class="col-lg-4">
-    <div class="card shadow-sm mb-4">
-      <div class="card-header bg-warning">
-        <h5 class="mb-0">Nueva inscripción</h5>
+<div class="management-layout">
+  <div class="form-stack">
+    <section class="glass-card form-panel">
+      <div class="panel-header">
+        <div>
+          <p class="panel-eyebrow">Integra atletas y competencias</p>
+          <h2>Nueva inscripción</h2>
+          <p class="panel-description">Selecciona evento y participante para sumar un registro en segundos.</p>
+        </div>
+        <span class="badge-soft">Inscripciones</span>
       </div>
-      <div class="card-body">
-        <form [formGroup]="createForm" (ngSubmit)="submit()" novalidate>
-          <div class="mb-3">
+
+      <form [formGroup]="createForm" (ngSubmit)="submit()" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
             <label class="form-label" for="evento">Evento</label>
             <select id="evento" class="form-select" formControlName="evento_id">
               <option value="" disabled>Seleccione un evento</option>
@@ -14,12 +20,12 @@
                 {{ evento.nombre }} ({{ evento.fecha | date:'mediumDate' }})
               </option>
             </select>
-            <div class="form-text text-danger" *ngIf="eventoId?.invalid && (eventoId?.dirty || eventoId?.touched)">
+            <div class="form-text form-error" *ngIf="eventoId?.invalid && (eventoId?.dirty || eventoId?.touched)">
               Debe seleccionar un evento.
             </div>
           </div>
 
-          <div class="mb-3">
+          <div class="form-group">
             <label class="form-label" for="participante">Participante</label>
             <select id="participante" class="form-select" formControlName="participante_id">
               <option value="" disabled>Seleccione un participante</option>
@@ -27,25 +33,30 @@
                 {{ participante.nombre }} {{ participante.apellido }}
               </option>
             </select>
-            <div class="form-text text-danger" *ngIf="participanteId?.invalid && (participanteId?.dirty || participanteId?.touched)">
+            <div class="form-text form-error" *ngIf="participanteId?.invalid && (participanteId?.dirty || participanteId?.touched)">
               Debe seleccionar un participante.
             </div>
           </div>
+        </div>
 
-          <button class="btn btn-warning w-100" type="submit" [disabled]="createForm.invalid">
-            Registrar inscripción
-          </button>
-        </form>
-      </div>
-    </div>
+        <div class="panel-actions">
+          <button class="btn btn-warning" type="submit" [disabled]="createForm.invalid">Registrar inscripción</button>
+        </div>
+      </form>
+    </section>
 
-    <div class="card shadow-sm">
-      <div class="card-header">
-        <h5 class="mb-0">Filtros</h5>
+    <section class="glass-card filters-panel">
+      <div class="panel-header">
+        <div>
+          <p class="panel-eyebrow">Personaliza la vista</p>
+          <h2>Filtros inteligentes</h2>
+          <p class="panel-description">Refina los registros y concéntrate en lo importante para tu jornada.</p>
+        </div>
       </div>
-      <div class="card-body">
-        <form [formGroup]="filterForm" novalidate>
-          <div class="mb-3">
+
+      <form [formGroup]="filterForm" novalidate>
+        <div class="form-grid two-cols">
+          <div class="form-group">
             <label class="form-label" for="filter-evento">Evento</label>
             <select id="filter-evento" class="form-select" formControlName="evento_id">
               <option value="">Todos</option>
@@ -53,7 +64,7 @@
             </select>
           </div>
 
-          <div class="mb-3">
+          <div class="form-group">
             <label class="form-label" for="filter-participante">Participante</label>
             <select id="filter-participante" class="form-select" formControlName="participante_id">
               <option value="">Todos</option>
@@ -63,7 +74,7 @@
             </select>
           </div>
 
-          <div class="mb-3">
+          <div class="form-group grid-span-2">
             <label class="form-label" for="filter-estado">Estado</label>
             <select id="filter-estado" class="form-select" formControlName="estado">
               <option value="">Todos</option>
@@ -71,35 +82,31 @@
               <option value="Cancelada">Cancelada</option>
             </select>
           </div>
+        </div>
 
-          <button class="btn btn-outline-secondary w-100" type="button" (click)="limpiarFiltros()">
-            Limpiar filtros
-          </button>
-        </form>
-      </div>
-    </div>
+        <div class="panel-actions">
+          <button class="btn btn-outline-secondary" type="button" (click)="limpiarFiltros()">Limpiar filtros</button>
+        </div>
+      </form>
+    </section>
   </div>
 
-  <div class="col-lg-8">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4 class="mb-0">Inscripciones</h4>
-      <button class="btn btn-link" type="button" (click)="cargarInscripciones()">
-        Actualizar
-      </button>
+  <section class="glass-card list-panel">
+    <div class="list-toolbar">
+      <h4>Inscripciones</h4>
+      <button class="btn btn-outline-primary" type="button" (click)="cargarInscripciones()">Actualizar lista</button>
     </div>
 
-    <div *ngIf="message" class="alert" [ngClass]="{'alert-success': message.type === 'success', 'alert-danger': message.type === 'danger'}">
+    <div *ngIf="message" class="app-alert" [ngClass]="{'app-alert--success': message.type === 'success', 'app-alert--danger': message.type === 'danger'}">
       {{ message.text }}
     </div>
 
-    <div *ngIf="loading" class="text-center py-5 text-muted">
-      Cargando inscripciones...
-    </div>
+    <div *ngIf="loading" class="loading-state">Cargando inscripciones...</div>
 
     <div *ngIf="!loading">
       <div class="table-responsive" *ngIf="filteredInscripciones.length; else noInscripciones">
-        <table class="table table-hover align-middle">
-          <thead class="table-light">
+        <table class="table align-middle">
+          <thead>
             <tr>
               <th>Evento</th>
               <th>Participante</th>
@@ -142,8 +149,8 @@
         </table>
       </div>
       <ng-template #noInscripciones>
-        <div class="alert alert-info">No hay inscripciones registradas.</div>
+        <div class="empty-state">No hay inscripciones registradas.</div>
       </ng-template>
     </div>
-  </div>
+  </section>
 </div>
