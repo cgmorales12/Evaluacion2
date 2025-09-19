@@ -7,7 +7,7 @@ import { Participante, CreateParticipante, UpdateParticipante } from '../models/
   providedIn: 'root'
 })
 export class ParticipanteService {
-  private apiUrl = 'https://localhost:7154/api/Participantes'; // Cambia el puerto si es diferente
+  private apiUrl = 'http://localhost:5016/api/Participantes'; // el puerto
 
   constructor(private http: HttpClient) { }
 

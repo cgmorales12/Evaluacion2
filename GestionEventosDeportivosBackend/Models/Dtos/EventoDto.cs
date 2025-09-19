@@ -6,7 +6,7 @@
         public string nombre { get; set; }
         public DateTime fecha { get; set; }
         public string ubicacion { get; set; }
-        public string descripcion { get; set; }
+        public string? descripcion { get; set; }
         public int total_participantes { get; set; } = 0;
     }
 
@@ -15,7 +15,7 @@
         public string nombre { get; set; }
         public DateTime fecha { get; set; }
         public string ubicacion { get; set; }
-        public string descripcion { get; set; }
+        public string? descripcion { get; set; }
     }
 
     public class UpdateEventoDto
@@ -23,6 +23,6 @@
         public string nombre { get; set; }
         public DateTime fecha { get; set; }
         public string ubicacion { get; set; }
-        public string descripcion { get; set; }
+        public string? descripcion { get; set; }
     }
 }

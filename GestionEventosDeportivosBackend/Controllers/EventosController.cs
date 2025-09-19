@@ -29,7 +29,7 @@ namespace GestionEventosDeportivos.Controllers
                     nombre = e.nombre,
                     fecha = e.fecha,
                     ubicacion = e.ubicacion,
-                    descripcion = e.descripcion,
+                    descripcion = e.descripcion ?? string.Empty,
                     total_participantes = e.Inscripciones.Count(i => i.estado == "Activa")
                 })
                 .ToListAsync();
@@ -50,7 +50,7 @@ namespace GestionEventosDeportivos.Controllers
                     nombre = e.nombre,
                     fecha = e.fecha,
                     ubicacion = e.ubicacion,
-                    descripcion = e.descripcion,
+                    descripcion = e.descripcion ?? string.Empty,
                     total_participantes = e.Inscripciones.Count(i => i.estado == "Activa")
                 })
                 .FirstOrDefaultAsync();
@@ -72,7 +72,9 @@ namespace GestionEventosDeportivos.Controllers
                 nombre = createEventoDto.nombre,
                 fecha = createEventoDto.fecha,
                 ubicacion = createEventoDto.ubicacion,
-                descripcion = createEventoDto.descripcion
+                descripcion = string.IsNullOrWhiteSpace(createEventoDto.descripcion)
+                    ? null
+                    : createEventoDto.descripcion.Trim()
             };
 
             _context.Eventos.Add(evento);
@@ -84,7 +86,7 @@ namespace GestionEventosDeportivos.Controllers
                 nombre = evento.nombre,
                 fecha = evento.fecha,
                 ubicacion = evento.ubicacion,
-                descripcion = evento.descripcion,
+                descripcion = evento.descripcion ?? string.Empty,
                 total_participantes = 0
             };
 
@@ -105,7 +107,9 @@ namespace GestionEventosDeportivos.Controllers
             evento.nombre = updateEventoDto.nombre;
             evento.fecha = updateEventoDto.fecha;
             evento.ubicacion = updateEventoDto.ubicacion;
-            evento.descripcion = updateEventoDto.descripcion;
+            evento.descripcion = string.IsNullOrWhiteSpace(updateEventoDto.descripcion)
+                ? null
+                : updateEventoDto.descripcion.Trim();
 
             try
             {

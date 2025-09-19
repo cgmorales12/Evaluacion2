@@ -64,7 +64,7 @@ export class EventosComponent implements OnInit {
       nombre: formValue.nombre.trim(),
       fecha: new Date(formValue.fecha),
       ubicacion: formValue.ubicacion.trim(),
-      descripcion: formValue.descripcion ? formValue.descripcion.trim() : ''
+      descripcion: formValue.descripcion ? formValue.descripcion.trim() : null
     };
 
     if (this.isEditing && this.selectedEventoId !== null) {

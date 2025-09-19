@@ -7,7 +7,7 @@ import { Inscripcion, CreateInscripcion, UpdateInscripcion } from '../models/ins
   providedIn: 'root'
 })
 export class InscripcionService {
-  private apiUrl = 'https://localhost:7154/api/Inscripciones'; // Cambia el puerto si es diferente
+  private apiUrl = 'http://localhost:5016/api/Inscripciones'; // el puerto 
 
   constructor(private http: HttpClient) { }
 

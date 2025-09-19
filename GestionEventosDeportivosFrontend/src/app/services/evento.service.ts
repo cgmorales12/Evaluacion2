@@ -7,7 +7,7 @@ import { Evento, CreateEvento, UpdateEvento } from '../models/evento.model';
   providedIn: 'root'
 })
 export class EventoService {
-  private apiUrl = 'https://localhost:7154/api/Eventos'; // Cambia el puerto si es diferente
+  private apiUrl = 'http://localhost:5016/api/Eventos'; // el puerto
 
   constructor(private http: HttpClient) { }
 

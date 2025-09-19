@@ -20,7 +20,7 @@ namespace GestionEventosDeportivos.Models
         public string ubicacion { get; set; }
 
         [StringLength(500)]
-        public string descripcion { get; set; }
+        public string? descripcion { get; set; }
 
         // Relación con inscripciones
         public virtual ICollection<InscripcionModel> Inscripciones { get; set; } = new List<InscripcionModel>();

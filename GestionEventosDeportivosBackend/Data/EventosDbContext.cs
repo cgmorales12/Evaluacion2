@@ -27,7 +27,9 @@ namespace GestionEventosDeportivos.Data
                 entity.HasKey(e => e.evento_id);
                 entity.Property(e => e.nombre).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.ubicacion).IsRequired().HasMaxLength(200);
-                entity.Property(e => e.descripcion).HasMaxLength(500);
+                entity.Property(e => e.descripcion)
+                      .HasMaxLength(500)
+                      .IsRequired(false);
             });
 
             // Configuración de la tabla Participantes
