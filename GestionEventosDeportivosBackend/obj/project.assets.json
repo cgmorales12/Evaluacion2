@@ -4525,11 +4525,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\CMG\\Downloads\\eva2-codex-design-sports-event-management-system (1)\\eva2-codex-design-sports-event-management-system\\GestionEventosDeportivosBackend\\GestionEventosDeportivos.csproj",
+      "projectUniqueName": "C:\\Users\\CMG\\Downloads\\eva2-codex-design-sports-event-management-system\\eva2-codex-design-sports-event-management-system\\GestionEventosDeportivosBackend\\GestionEventosDeportivos.csproj",
       "projectName": "GestionEventosDeportivos",
-      "projectPath": "C:\\Users\\CMG\\Downloads\\eva2-codex-design-sports-event-management-system (1)\\eva2-codex-design-sports-event-management-system\\GestionEventosDeportivosBackend\\GestionEventosDeportivos.csproj",
+      "projectPath": "C:\\Users\\CMG\\Downloads\\eva2-codex-design-sports-event-management-system\\eva2-codex-design-sports-event-management-system\\GestionEventosDeportivosBackend\\GestionEventosDeportivos.csproj",
       "packagesPath": "C:\\Users\\CMG\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\CMG\\Downloads\\eva2-codex-design-sports-event-management-system (1)\\eva2-codex-design-sports-event-management-system\\GestionEventosDeportivosBackend\\obj\\",
+      "outputPath": "C:\\Users\\CMG\\Downloads\\eva2-codex-design-sports-event-management-system\\eva2-codex-design-sports-event-management-system\\GestionEventosDeportivosBackend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
