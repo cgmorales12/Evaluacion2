@@ -1,32 +1,72 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container">
-    <a class="navbar-brand" routerLink="/home">
-      🏆 Gestión Eventos Deportivos
-    </a>
-    
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/eventos" routerLinkActive="active">Eventos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/participantes" routerLinkActive="active">Participantes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/inscripciones" routerLinkActive="active">Inscripciones</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<div class="app-shell">
+  <div class="app-backdrop"></div>
 
-<div class="container mt-4">
-  <router-outlet></router-outlet>
+  <nav class="navbar navbar-expand-lg navbar-dark app-navbar">
+    <div class="container-xl">
+      <a class="navbar-brand" routerLink="/home">🏆 Gestión Eventos Deportivos</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/eventos" routerLinkActive="active">Eventos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/participantes" routerLinkActive="active">Participantes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/inscripciones" routerLinkActive="active">Inscripciones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/citas" routerLinkActive="active">Citas</a>
+          </li>
+          <li class="nav-item d-none d-lg-block">
+            <span class="nav-pill">Interfaz renovada ✨</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="app-hero">
+    <div class="container-xl">
+      <div class="hero-content">
+        <div>
+          <p class="eyebrow">Nueva experiencia visual</p>
+          <h1>Gestiona tus competencias con un panel vibrante y envolvente</h1>
+          <p class="hero-text">
+            Organiza eventos, potencia la participación y controla tus inscripciones con una atmósfera moderna, llena de
+            color y claridad.
+          </p>
+          <div class="hero-actions">
+            <a routerLink="/eventos" class="btn btn-primary">Explorar eventos</a>
+            <a routerLink="/participantes" class="btn-ghost">Ver participantes</a>
+          </div>
+        </div>
+        <div class="hero-card glass-card">
+          <span class="hero-chip">Panel activo</span>
+          <h2>Control total</h2>
+          <p>Información unificada para tus próximas competiciones.</p>
+          <div class="hero-metric">
+            <strong>24/7</strong>
+            <span>Disponibilidad garantizada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main container-xl">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container-xl">
+      <span>© 2024 Gestión Eventos Deportivos. Una nueva perspectiva para tus torneos.</span>
+    </div>
+  </footer>
 </div>

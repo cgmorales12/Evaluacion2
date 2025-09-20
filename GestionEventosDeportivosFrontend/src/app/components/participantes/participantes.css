@@ -1,20 +1,8 @@
-.card {
-  border: none;
+.form-panel,
+.list-panel {
+  padding: 2.5rem;
 }
 
-.card-header {
-  font-weight: 600;
-}
-
-.table td {
-  vertical-align: middle;
-}
-
-.btn-link {
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.alert {
-  margin-bottom: 1rem;
+.list-panel {
+  overflow: hidden;
 }

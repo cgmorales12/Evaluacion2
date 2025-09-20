@@ -1,76 +1,84 @@
-<div class="row g-4">
-  <div class="col-lg-4">
-    <div class="card shadow-sm">
-      <div class="card-header bg-primary text-white">
-        <h5 class="mb-0">{{ isEditing ? 'Editar evento' : 'Nuevo evento' }}</h5>
+<div class="management-layout">
+  <section class="glass-card form-panel">
+    <div class="panel-header">
+      <div>
+        <p class="panel-eyebrow">Configura tus competencias</p>
+        <h2>{{ isEditing ? 'Actualizar evento' : 'Crear nuevo evento' }}</h2>
+        <p class="panel-description">
+          Define la identidad del torneo, ajusta fechas, ubicaciones y comparte la historia detrás de cada encuentro.
+        </p>
       </div>
-      <div class="card-body">
-        <form [formGroup]="eventoForm" (ngSubmit)="submit()" novalidate>
-          <div class="mb-3">
-            <label class="form-label" for="nombre">Nombre</label>
-            <input id="nombre" type="text" class="form-control" formControlName="nombre" maxlength="100" />
-            <div class="form-text text-danger" *ngIf="nombre?.invalid && (nombre?.dirty || nombre?.touched)">
-              El nombre es obligatorio (máximo 100 caracteres).
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label" for="fecha">Fecha</label>
-            <input id="fecha" type="date" class="form-control" formControlName="fecha" />
-            <div class="form-text text-danger" *ngIf="fecha?.invalid && (fecha?.dirty || fecha?.touched)">
-              La fecha es obligatoria.
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label" for="ubicacion">Ubicación</label>
-            <input id="ubicacion" type="text" class="form-control" formControlName="ubicacion" maxlength="200" />
-            <div class="form-text text-danger" *ngIf="ubicacion?.invalid && (ubicacion?.dirty || ubicacion?.touched)">
-              La ubicación es obligatoria (máximo 200 caracteres).
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label" for="descripcion">Descripción</label>
-            <textarea id="descripcion" rows="3" class="form-control" formControlName="descripcion" maxlength="500"></textarea>
-            <div class="form-text text-danger" *ngIf="descripcion?.invalid && (descripcion?.dirty || descripcion?.touched)">
-              La descripción admite hasta 500 caracteres.
-            </div>
-          </div>
-
-          <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="submit" [disabled]="eventoForm.invalid">
-              {{ isEditing ? 'Actualizar evento' : 'Crear evento' }}
-            </button>
-            <button class="btn btn-outline-secondary" type="button" *ngIf="isEditing" (click)="cancelarEdicion()">
-              Cancelar edición
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-8">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4 class="mb-0">Eventos registrados</h4>
-      <button class="btn btn-link" type="button" (click)="cargarEventos()">
-        Actualizar
-      </button>
+      <span class="badge-soft">Eventos</span>
     </div>
 
-    <div *ngIf="message" class="alert" [ngClass]="{'alert-success': message.type === 'success', 'alert-danger': message.type === 'danger'}">
+    <form [formGroup]="eventoForm" (ngSubmit)="submit()" novalidate>
+      <div class="form-grid two-cols">
+        <div class="form-group">
+          <label class="form-label" for="nombre">Nombre</label>
+          <input id="nombre" type="text" class="form-control" formControlName="nombre" maxlength="100" />
+          <div class="form-text form-error" *ngIf="nombre?.invalid && (nombre?.dirty || nombre?.touched)">
+            El nombre es obligatorio (máximo 100 caracteres).
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="fecha">Fecha</label>
+          <input id="fecha" type="date" class="form-control" formControlName="fecha" />
+          <div class="form-text form-error" *ngIf="fecha?.invalid && (fecha?.dirty || fecha?.touched)">
+            La fecha es obligatoria.
+          </div>
+        </div>
+
+        <div class="form-group grid-span-2">
+          <label class="form-label" for="ubicacion">Ubicación</label>
+          <input id="ubicacion" type="text" class="form-control" formControlName="ubicacion" maxlength="200" />
+          <div class="form-text form-error" *ngIf="ubicacion?.invalid && (ubicacion?.dirty || ubicacion?.touched)">
+            La ubicación es obligatoria (máximo 200 caracteres).
+          </div>
+        </div>
+
+        <div class="form-group grid-span-2">
+          <label class="form-label" for="descripcion">Descripción</label>
+          <textarea
+            id="descripcion"
+            rows="3"
+            class="form-control"
+            formControlName="descripcion"
+            maxlength="500"
+          ></textarea>
+          <div class="form-text form-error" *ngIf="descripcion?.invalid && (descripcion?.dirty || descripcion?.touched)">
+            La descripción admite hasta 500 caracteres.
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-actions">
+        <button class="btn btn-primary" type="submit" [disabled]="eventoForm.invalid">
+          {{ isEditing ? 'Guardar cambios' : 'Registrar evento' }}
+        </button>
+        <button class="btn btn-outline-secondary" type="button" *ngIf="isEditing" (click)="cancelarEdicion()">
+          Cancelar edición
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <section class="glass-card list-panel">
+    <div class="list-toolbar">
+      <h4>Eventos registrados</h4>
+      <button class="btn btn-outline-primary" type="button" (click)="cargarEventos()">Actualizar lista</button>
+    </div>
+
+    <div *ngIf="message" class="app-alert" [ngClass]="{'app-alert--success': message.type === 'success', 'app-alert--danger': message.type === 'danger'}">
       {{ message.text }}
     </div>
 
-    <div *ngIf="loading" class="text-center py-5 text-muted">
-      Cargando eventos...
-    </div>
+    <div *ngIf="loading" class="loading-state">Cargando eventos...</div>
 
     <div *ngIf="!loading">
       <div class="table-responsive" *ngIf="eventos.length; else noEventos">
-        <table class="table table-hover align-middle">
-          <thead class="table-light">
+        <table class="table align-middle">
+          <thead>
             <tr>
               <th>Nombre</th>
               <th>Fecha</th>
@@ -101,8 +109,8 @@
         </table>
       </div>
       <ng-template #noEventos>
-        <div class="alert alert-info">No hay eventos registrados. ¡Crea el primero!</div>
+        <div class="empty-state">No hay eventos registrados. ¡Crea el primero!</div>
       </ng-template>
     </div>
-  </div>
+  </section>
 </div>

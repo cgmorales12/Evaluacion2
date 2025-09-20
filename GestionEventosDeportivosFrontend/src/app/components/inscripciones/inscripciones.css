@@ -1,24 +1,18 @@
-.card {
-  border: none;
+.form-panel,
+.filters-panel,
+.list-panel {
+  padding: 2.5rem;
 }
 
-.card-header {
-  font-weight: 600;
+.filters-panel {
+  background: rgba(255, 255, 255, 0.72);
 }
 
-.table td {
-  vertical-align: middle;
+.list-panel {
+  overflow: hidden;
 }
 
-.btn-link {
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.alert {
-  margin-bottom: 1rem;
-}
-
-.badge {
-  font-size: 0.875rem;
+.form-stack {
+  display: grid;
+  gap: 1.75rem;
 }
