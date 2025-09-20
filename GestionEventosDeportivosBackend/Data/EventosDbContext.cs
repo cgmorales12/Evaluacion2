@@ -15,6 +15,7 @@ namespace GestionEventosDeportivos.Data
         public DbSet<EventoModel> Eventos { get; set; }
         public DbSet<ParticipanteModel> Participantes { get; set; }
         public DbSet<InscripcionModel> Inscripciones { get; set; }
+        public DbSet<CitaModel> Citas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -66,6 +67,18 @@ namespace GestionEventosDeportivos.Data
 
                 // Evitar inscripciones duplicadas (mismo participante en mismo evento)
                 entity.HasIndex(i => new { i.evento_id, i.participante_id }).IsUnique();
+            });
+
+            // Configuración de la tabla Citas
+            modelBuilder.Entity<CitaModel>(entity =>
+            {
+                entity.ToTable("Citas");
+                entity.HasKey(c => c.cita_id);
+                entity.Property(c => c.fecha_cita).HasColumnType("date").IsRequired();
+                entity.Property(c => c.hora_inicio).HasColumnType("time(6)").IsRequired();
+                entity.Property(c => c.hora_fin).HasColumnType("time(6)").IsRequired();
+                entity.Property(c => c.motivo).HasMaxLength(200);
+                entity.HasIndex(c => new { c.fecha_cita, c.hora_inicio }).IsUnique();
             });
         }
     }

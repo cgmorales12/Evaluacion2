@@ -1,0 +1,140 @@
+<div class="management-layout">
+  <div class="form-stack">
+    <section class="glass-card form-panel">
+      <div class="panel-header">
+        <div>
+          <p class="panel-eyebrow">Organiza tu agenda laboral</p>
+          <h2>Programar nueva cita</h2>
+          <p class="panel-description">
+            Selecciona un día habilitado y el horario disponible para reservar automáticamente bloques de 30 minutos.
+          </p>
+        </div>
+        <span class="badge-soft">Citas</span>
+      </div>
+
+      <form [formGroup]="citaForm" (ngSubmit)="submit()" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="fecha-cita">Fecha de la cita</label>
+            <select id="fecha-cita" class="form-select" formControlName="fecha_cita">
+              <option value="" disabled>Seleccione un día disponible</option>
+              <option *ngFor="let fecha of fechasTrabajo" [value]="fecha">
+                {{ fecha | date:'fullDate' }}
+              </option>
+            </select>
+            <div class="form-text form-error" *ngIf="fechaCita?.invalid && (fechaCita?.dirty || fechaCita?.touched)">
+              Debe seleccionar una fecha hábil.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="hora-inicio">Hora de inicio</label>
+            <select id="hora-inicio" class="form-select" formControlName="hora_inicio">
+              <option value="" disabled>Seleccione hora disponible</option>
+              <option *ngFor="let hora of horasDisponibles" [value]="hora">
+                {{ hora }}
+              </option>
+            </select>
+            <div class="form-text form-error" *ngIf="horaInicio?.invalid && (horaInicio?.dirty || horaInicio?.touched)">
+              Debe seleccionar una hora de inicio.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="hora-fin">Hora de fin</label>
+            <input
+              id="hora-fin"
+              type="text"
+              class="form-control"
+              formControlName="hora_fin"
+              readonly
+            />
+          </div>
+
+          <div class="form-group grid-span-2">
+            <label class="form-label" for="motivo">Motivo u observaciones</label>
+            <textarea
+              id="motivo"
+              rows="3"
+              class="form-control"
+              formControlName="motivo"
+              placeholder="Ej. Reunión de planificación"
+            ></textarea>
+            <div class="form-text form-error" *ngIf="motivo?.invalid && (motivo?.dirty || motivo?.touched)">
+              El motivo admite hasta 200 caracteres.
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-actions">
+          <button class="btn btn-primary" type="submit" [disabled]="citaForm.invalid || submitting">
+            {{ submitting ? 'Registrando…' : 'Guardar cita' }}
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="glass-card guidance-panel">
+      <div class="panel-header">
+        <div>
+          <p class="panel-eyebrow">Disponibilidad</p>
+          <h3>Días habilitados</h3>
+          <p class="panel-description">
+            Solo podrás agendar citas en las fechas incluidas en este listado semanal.
+          </p>
+        </div>
+      </div>
+
+      <ul class="working-days" *ngIf="fechasTrabajo.length; else noDias">
+        <li *ngFor="let fecha of fechasTrabajo | slice:0:7">
+          <span class="working-days__date">{{ fecha | date:'EEEE dd/MM' }}</span>
+          <span class="working-days__badge">Disponible</span>
+        </li>
+      </ul>
+      <ng-template #noDias>
+        <p class="empty-state">Aún no se han configurado días hábiles para agendar.</p>
+      </ng-template>
+    </section>
+  </div>
+
+  <section class="glass-card list-panel">
+    <div class="list-toolbar">
+      <h4>Citas programadas</h4>
+      <button class="btn btn-outline-primary" type="button" (click)="cargarCitas()" [disabled]="loading">
+        {{ loading ? 'Actualizando…' : 'Actualizar lista' }}
+      </button>
+    </div>
+
+    <div *ngIf="message" class="app-alert" [ngClass]="{'app-alert--success': message.type === 'success', 'app-alert--danger': message.type === 'danger', 'app-alert--info': message.type === 'info'}">
+      {{ message.text }}
+    </div>
+
+    <div *ngIf="loading" class="loading-state">Cargando citas…</div>
+
+    <div *ngIf="!loading">
+      <div class="table-responsive" *ngIf="citas.length; else noCitas">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Hora inicio</th>
+              <th>Hora fin</th>
+              <th>Motivo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cita of citas">
+              <td>{{ cita.fecha_cita | date:'mediumDate' }}</td>
+              <td>{{ cita.hora_inicio }}</td>
+              <td>{{ cita.hora_fin }}</td>
+              <td>{{ cita.motivo || 'Sin observaciones' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noCitas>
+        <div class="empty-state">No hay citas programadas para los días habilitados.</div>
+      </ng-template>
+    </div>
+  </section>
+</div>
